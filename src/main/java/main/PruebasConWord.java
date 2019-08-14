@@ -41,7 +41,7 @@ public class PruebasConWord {
 		LeerDocumentoWord documento1 = new LeerDocumentoWord();
 		LeerDocumentoWord documento2 = new LeerDocumentoWord();
 		
-		documento1.openDocument("C:\\Users\\EIB\\Desktop\\MC-MUTUAL Funcional\\Documentos prueba","mcm_framework.docx");
+		documento1.openDocument("C:\\Users\\EIB\\Desktop\\MC-MUTUAL Funcional\\Documentos prueba","clausulas.docx");
 		documento2.openDocument("C:\\Users\\EIB\\Desktop\\MC-MUTUAL Funcional\\Documentos prueba","Ejemplo documento para insertar.docx");
 		
 		

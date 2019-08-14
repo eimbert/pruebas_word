@@ -16,8 +16,9 @@ public class BuscarCamposEnDocumento extends LeerDocumentoWord {
 	
 	public void buscarLasEtiquetas(String codInicio, String codFinal) throws FileNotFoundException, InvalidFormatException, IOException {
 	 this.openDocument();
-	 this.leerParrafosEnTexto();
-	 this.leerParrafosEnTablas();
+	 //this.leerParrafosEnTexto();
+	 //this.leerParrafosEnTablas();
+	 this.leerDoc();
 		
 		for(int indice = 0; indice < runs.size(); indice++) {
 			if(buscarCompleta(runs.get(indice).getText(0), codInicio, codFinal)) {
