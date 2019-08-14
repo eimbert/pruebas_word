@@ -8,8 +8,8 @@ public class Constants {
     public static final String TEST_DOCUMENT_NAME = "MODELO_PLIEGO_PCAP.docx";
     //public static final String TEST_DOCUMENT_NAME = "Contrato.docx";
     
-    public static final String IN_PATH = "C:\\Users\\eimbe\\Desktop\\pruebas";
-    public static final String OUT_PATH = "C:\\Users\\eimbe\\Desktop\\pruebas\\salida";
+    public static final String IN_PATH = "C:\\Users\\EIB\\Desktop\\MC-MUTUAL Funcional\\Documentos prueba";
+    public static final String OUT_PATH = "C:\\Users\\EIB\\Desktop\\MC-MUTUAL Funcional\\Documentos prueba\\salida";
     public static final String OUT_PATH_PDF = "pdf\\";
     		
     public static final String CODIGO_INICIO_PARRAFO = "${";

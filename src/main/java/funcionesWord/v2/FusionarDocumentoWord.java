@@ -30,30 +30,13 @@ public class FusionarDocumentoWord extends LeerDocumentoWord{
 		seleccionarTipologia(tipologiaDoc);
 	}
 	
-	public void insertarDocumento(List<XWPFRun> runsInsert, String etiquetaDondeInsertar ) throws FileNotFoundException, InvalidFormatException, IOException {
-		leerDocumento(Constants.CODIGO_INICIO, Constants.CODIGO_FINAL);
-		int ind = 0;
-		
-		for(DatosEtiqueta parrafo : docFragmentado) {
-			
-			if(parrafo.getParrafoConEtiqueta() && parrafo.getEtiqueta(Constants.CODIGO_INICIO, Constants.CODIGO_FINAL).equals(etiquetaDondeInsertar)) { 
-				for(int indInsert = 0; indInsert < runsInsert.size(); indInsert++)
-				
-					runs.add(++ind, runsInsert.get(indInsert));
-				
-				break;
-			}
-			ind++;
-		}
-	}
-	
-	
 	
 	private void leerDocumento(String codInicio, String codFinal) throws FileNotFoundException, InvalidFormatException, IOException {
 		
 		this.openDocument();
-		this.leerParrafosEnTexto();
-		this.leerParrafosEnTablas();
+		//this.leerParrafosEnTexto();
+		//this.leerParrafosEnTablas();
+		this.leerDoc();
 		
 		for(int indice = 0; indice < runs.size(); indice++) {
 			DatosEtiqueta parrafo = new DatosEtiqueta(new FragmentoDelDocumento(runs.get(indice)));

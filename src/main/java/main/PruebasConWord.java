@@ -1,13 +1,16 @@
 package main;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigInteger;
 import java.util.List;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.xwpf.usermodel.BodyElementType;
 import org.apache.poi.xwpf.usermodel.IBodyElement;
@@ -38,31 +41,44 @@ public class PruebasConWord {
 		LeerDocumentoWord documento1 = new LeerDocumentoWord();
 		LeerDocumentoWord documento2 = new LeerDocumentoWord();
 		
-		//documento1.openDocument("C:\\Users\\EIB\\Desktop\\MC-MUTUAL Funcional\\Documentos prueba","MODELO_PLIEGO_PCAP.docx");
-		documento2.openDocument("C:\\Users\\eimbe\\Desktop\\pruebas","prueba.docx");
+		documento1.openDocument("C:\\Users\\EIB\\Desktop\\MC-MUTUAL Funcional\\Documentos prueba","mcm_framework.docx");
+		documento2.openDocument("C:\\Users\\EIB\\Desktop\\MC-MUTUAL Funcional\\Documentos prueba","Ejemplo documento para insertar.docx");
 		
 		
-		XWPFDocument document = new XWPFDocument();
+		File filename = new File(Constants.IN_PATH + File.separator + "plantillaMC.docx");
+		InputStream is = new FileInputStream(filename);
+		OPCPackage oPackage = OPCPackage.open(is);
+		XWPFDocument document = new XWPFDocument(oPackage);
 		
-		XWPFStyles estilo = documento2.getDocument().getStyles();
-		XWPFStyles estiloNuevoDoc = document.createStyles();
+		document.removeBodyElement(0);
 		
 
 		int pos = 0;
 		int numTables = 0;
-		List<IBodyElement> listElements = documento2.getDocument().getBodyElements();
+		List<IBodyElement> listElements = documento1.getDocument().getBodyElements();
 		for(IBodyElement element: listElements) {
 			if (element.getElementType() == BodyElementType.PARAGRAPH) {
 				document.createParagraph();
 				document.setParagraph((XWPFParagraph)element, pos++);
 			}else 
 				if(element.getElementType() == BodyElementType.TABLE) {
-					XWPFTable tbl = document.createTable();
-					document.setTable(numTables, (XWPFTable)element);
-					setTableBorder(tbl);
+					document.createTable();
+					document.setTable(numTables++, (XWPFTable)element);
+				}
+		}
+		
+		
+		List<IBodyElement>listElements2 = documento2.getDocument().getBodyElements();
+		for(IBodyElement element: listElements2) {
+			if (element.getElementType() == BodyElementType.PARAGRAPH) {
+				document.createParagraph();
+				document.setParagraph((XWPFParagraph)element, pos++);
+			}else 
+				if(element.getElementType() == BodyElementType.TABLE) {
+					document.createTable();
+					document.setTable(numTables++, (XWPFTable)element);
 			}
 		}
-
 	
 	
 		
@@ -85,5 +101,5 @@ public class PruebasConWord {
 		borders.addNewInsideH().setVal(STBorder.SINGLE);
 		borders.addNewInsideV().setVal(STBorder.SINGLE);
 
-		}
+	}
 }

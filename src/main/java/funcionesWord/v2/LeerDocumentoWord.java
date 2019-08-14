@@ -11,6 +11,8 @@ import java.util.List;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.xwpf.usermodel.BodyElementType;
+import org.apache.poi.xwpf.usermodel.IBodyElement;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
@@ -29,23 +31,43 @@ public class LeerDocumentoWord {
 	
 	private XWPFDocument document;
 	
-	protected void leerParrafosEnTexto() {
-		for (XWPFParagraph p : document.getParagraphs()) 
-			for (XWPFRun r : p.getRuns()) 
-				if(r!=null && r.getText(0)!=null)
-					runs.add(r);
-	}
+//	protected void leerParrafosEnTexto() {
+//		for (XWPFParagraph p : document.getParagraphs()) 
+//			for (XWPFRun r : p.getRuns()) 
+//				if(r!=null && r.getText(0)!=null)
+//					runs.add(r);
+//	}
+//	
+//	
+//	protected void leerParrafosEnTablas() {
+//		for (XWPFTable tbl : document.getTables())
+//			for (XWPFTableRow row : tbl.getRows())
+//				for (XWPFTableCell cell : row.getTableCells())
+//					for (XWPFParagraph p : cell.getParagraphs())
+//						for (XWPFRun r : p.getRuns())
+//							if(r!=null && r.getText(0)!=null)
+//								runs.add(r);
+//							
+//	}
 	
-	
-	protected void leerParrafosEnTablas() {
-		for (XWPFTable tbl : document.getTables())
-			for (XWPFTableRow row : tbl.getRows())
-				for (XWPFTableCell cell : row.getTableCells())
-					for (XWPFParagraph p : cell.getParagraphs())
-						for (XWPFRun r : p.getRuns())
-							if(r!=null && r.getText(0)!=null)
-								runs.add(r);
-							
+	protected void leerDoc() {
+
+		List<IBodyElement> listElements = document.getBodyElements();
+		for(IBodyElement element: listElements) {
+			if (element.getElementType() == BodyElementType.PARAGRAPH) {
+				for (XWPFRun r : ((XWPFParagraph) element).getRuns()) 
+					if(r!=null && r.getText(0)!=null)
+						runs.add(r);
+			}else 
+				if(element.getElementType() == BodyElementType.TABLE) {
+					for (XWPFTableRow row : ((XWPFTable) element).getRows())
+						for (XWPFTableCell cell : row.getTableCells())
+							for (XWPFParagraph p : cell.getParagraphs())
+								for (XWPFRun r : p.getRuns())
+									if(r!=null && r.getText(0)!=null)
+										runs.add(r);
+				}
+		}
 	}
 	
 	protected  void openDocument() throws FileNotFoundException, IOException, InvalidFormatException {
@@ -61,9 +83,9 @@ public class LeerDocumentoWord {
 		InputStream is = new FileInputStream(filename);
 		OPCPackage oPackage = OPCPackage.open(is);
 		document = new XWPFDocument(oPackage);
-		this.leerParrafosEnTexto();
-		this.leerParrafosEnTablas();
-		
+		//this.leerParrafosEnTexto();
+		//this.leerParrafosEnTablas();
+		this.leerDoc();
 		
 	}
 	
