@@ -11,7 +11,7 @@ public class TagWord {
 	private String tipoCampo;
 	private String textoSolicitud;
 	private String respuesta;
-	private String textoAyuda;
+	private String aux;
 	
 
 	public TagWord() {
@@ -23,7 +23,7 @@ public class TagWord {
 		this.tipoCampo = tipoCampo;
 		this.textoSolicitud = textoSolicitud;
 		this.respuesta = "";
-		this.textoAyuda = ayuda;
+		this.aux = ayuda;
 	}
 	
 	public TagWord(String codigoTag, String tipoCampo, String textoSolicitud) {
@@ -31,7 +31,7 @@ public class TagWord {
 		this.tipoCampo = tipoCampo;
 		this.textoSolicitud = textoSolicitud;
 		this.respuesta = "";
-		this.textoAyuda = "";
+		this.aux = "";
 	}
 
 	public TagWord(String codigoTag, String tipologia, String tipoCampo, String textoSolicitud, String respuesta,
@@ -42,7 +42,7 @@ public class TagWord {
 		this.tipoCampo = tipoCampo;
 		this.textoSolicitud = textoSolicitud;
 		this.respuesta = respuesta;
-		this.textoAyuda = textoAyuda;
+		this.aux = textoAyuda;
 	}
 	
 	

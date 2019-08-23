@@ -7,7 +7,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
@@ -29,23 +31,29 @@ import org.openxmlformats.schemas.wordprocessingml.x2006.main.STBorder;
 import org.w3c.dom.stylesheets.DocumentStyle;
 
 import fr.opensagres.poi.xwpf.converter.core.Color;
-import funcionesWord.v2.BuscarCamposEnDocumento;
 import funcionesWord.v2.Constants;
 import funcionesWord.v2.FusionarDocumentoWord;
 import funcionesWord.v2.LeerDocumentoWord;
+import funcionesWord.v2.UtilsWord;
 
 public class PruebasConWord {
 
 	public static void main(String[] args) throws FileNotFoundException, InvalidFormatException, IOException, XmlException {
 		
-		LeerDocumentoWord documento1 = new LeerDocumentoWord();
+		Map<String, UtilsWord> partesDelDocumento = new HashMap<String, UtilsWord>();
+		Map<String, LeerDocumentoWord> documentosAdjuntos = new HashMap<String, LeerDocumentoWord>(); 
+		
+		//documentosAdjuntos.put(", value)
 		LeerDocumentoWord documento2 = new LeerDocumentoWord();
+
 		
-		documento1.openDocument("C:\\Users\\EIB\\Desktop\\MC-MUTUAL Funcional\\Documentos prueba","clausulas.docx");
-		documento2.openDocument("C:\\Users\\EIB\\Desktop\\MC-MUTUAL Funcional\\Documentos prueba","Ejemplo documento para insertar.docx");
+		partesDelDocumento.put("ANEXO A", new UtilsWord("ANEXO A.docx"));
+		partesDelDocumento.put("ANEXO B", new UtilsWord("ANEXO B.docx"));
+		partesDelDocumento.put("ANEXO B", new UtilsWord("ANEXO B.docx"));
 		
 		
-		File filename = new File(Constants.IN_PATH + File.separator + "plantillaMC.docx");
+		//File filename = new File(Constants.IN_PATH + File.separator + "plantillaMC.docx");
+		File filename = new File("C:\\Users\\eimbe\\Desktop\\pruebas" + File.separator + "plantillaMCp.docx");
 		InputStream is = new FileInputStream(filename);
 		OPCPackage oPackage = OPCPackage.open(is);
 		XWPFDocument document = new XWPFDocument(oPackage);
@@ -81,7 +89,6 @@ public class PruebasConWord {
 		}
 	
 	
-		
 		FileOutputStream fileOutput = new FileOutputStream (Constants.OUT_PATH + File.separator + Constants.TEST_DOCUMENT_NAME);
 		document.write(fileOutput);
 		fileOutput.close();

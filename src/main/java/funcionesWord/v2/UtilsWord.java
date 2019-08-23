@@ -9,15 +9,18 @@ import lombok.Getter;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
-public class BuscarCamposEnDocumento extends LeerDocumentoWord {
+public class UtilsWord extends LeerDocumentoWord {
 	
 	@Getter
 	private List<TagWord> etiquetas = new ArrayList<TagWord>();
+	private String docName;
+	
+	public UtilsWord(String docName){
+		this.docName = docName;
+	}
 	
 	public void buscarLasEtiquetas(String codInicio, String codFinal) throws FileNotFoundException, InvalidFormatException, IOException {
-	 this.openDocument();
-	 //this.leerParrafosEnTexto();
-	 //this.leerParrafosEnTablas();
+	 this.openDocument(docName);
 	 this.leerDoc();
 		
 		for(int indice = 0; indice < runs.size(); indice++) {

@@ -1,0 +1,16 @@
+ANEXO A
+#{replace:check:oferta_evaluable}# 
+#{insert:doc:aspectos_valoracion}#
+
+ANEXO B
+#{replace:check:oferta_tecnica}#
+#{insert:doc:detalle}#
+#{replace:check:oferta_economica}#
+
+ANEXO C
+#{insert:table:criterios_economicos}#
+#{insert:doc:criterios_economicos}#
+#{replace:text:criterios_evaluables}#
+#{replace:check:si}#
+#{replace:check:no}#
+#{replace:text:valoración_tecnica}#

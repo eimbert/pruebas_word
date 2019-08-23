@@ -78,13 +78,20 @@ public class LeerDocumentoWord {
 		
 	}
 	
+	public  void openDocument(String DOCUMENT_NAME) throws FileNotFoundException, IOException, InvalidFormatException {
+		File filename = new File(Constants.IN_PATH + File.separator + DOCUMENT_NAME);
+		InputStream is = new FileInputStream(filename);
+		OPCPackage oPackage = OPCPackage.open(is);
+		document = new XWPFDocument(oPackage);
+		this.leerDoc();
+		
+	}
+	
 	public  void openDocument(String IN_PATH, String DOCUMENT_NAME) throws FileNotFoundException, IOException, InvalidFormatException {
 		File filename = new File(IN_PATH + File.separator + DOCUMENT_NAME);
 		InputStream is = new FileInputStream(filename);
 		OPCPackage oPackage = OPCPackage.open(is);
 		document = new XWPFDocument(oPackage);
-		//this.leerParrafosEnTexto();
-		//this.leerParrafosEnTablas();
 		this.leerDoc();
 		
 	}
